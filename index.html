@@ -19,9 +19,87 @@ section{padding:45px 18px}.wrap{max-width:980px;margin:auto}.section-title{text-
 .timer{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:620px;margin:24px auto 4px}.unit{padding:16px 6px;border:1px solid #ffffff50;border-radius:14px;background:#ffffff12}.num{display:block;font-size:clamp(25px,6vw,42px);font-weight:600}.unit small{font-size:10px;letter-spacing:.12em;text-transform:uppercase}
 .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.card{background:white;border:1px solid #d7e5f6;border-radius:20px;padding:25px;box-shadow:0 8px 25px #173d7009}.card .symbol{font-size:30px}.card h3{font:27px 'Playfair Display',serif;color:var(--navy);margin:8px 0 12px}.detail{line-height:1.8;color:#51657d;font-size:14px;min-height:54px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--navy);color:white;text-decoration:none;border:0;border-radius:999px;padding:13px 20px;font:600 13px Montserrat, sans-serif;cursor:pointer;margin-top:16px}.btn:hover{background:#285b97}.rsvp{max-width:700px;margin:auto;background:white;border:1px solid #d7e5f6;border-radius:22px;padding:28px;box-shadow:0 8px 25px #173d7009}.field{display:flex;gap:10px;margin-top:18px}.field input{width:100%;min-width:0;border:1px solid #c9d9ed;border-radius:12px;padding:14px 15px;font:15px Montserrat, sans-serif;outline-color:var(--blue)}.field .btn{margin:0;white-space:nowrap}.note{font-size:12px;color:#708198;line-height:1.6;margin-top:12px}.status{margin-top:15px;font-size:14px;line-height:1.6}.footer{text-align:center;padding:35px 15px;background:#e8f2ff;color:#4c6585}.footer strong{font:28px 'Great Vibes',cursive;color:var(--navy)}
 @media(max-width:650px){.hero{min-height:520px}.hero-inner{padding:38px 18px}.cards{grid-template-columns:1fr}.timer{gap:6px}.unit{padding:13px 3px}.field{flex-direction:column}.field .btn{width:100%}.card{padding:22px}}
+/* Pantalla de bienvenida musical */
+#pantallaInicio {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+  background: linear-gradient(145deg, #f7fbff, #d9e9fc);
+}
+
+#pantallaInicio .bienvenida {
+  max-width: 430px;
+  width: 100%;
+  padding: 40px 24px;
+  border: 1px solid #b6cce8;
+  border-radius: 220px 220px 24px 24px;
+  background: #ffffffd9;
+  box-shadow: 0 18px 60px #173d7020;
+}
+
+#pantallaInicio h1 {
+  font: 52px 'Great Vibes', cursive;
+  color: #173d70;
+  margin: 20px 0 8px;
+}
+
+#pantallaInicio p {
+  color: #51657d;
+  line-height: 1.7;
+}
+
+#abrirInvitacion {
+  background: #173d70;
+  color: white;
+  border: 0;
+  border-radius: 999px;
+  padding: 15px 24px;
+  font: 600 14px Montserrat, sans-serif;
+  cursor: pointer;
+  margin-top: 18px;
+}
+
+#abrirInvitacion:hover {
+  background: #285b97;
+}
+
+#mensajeMusica {
+  font-size: 12px;
+  color: #51657d;
+}
 </style>
 </head>
 <body>
+  <div id="pantallaInicio">
+  <div class="bienvenida">
+    <div style="color:#c6a76a;font-size:28px">✧ ♡ ✧</div>
+
+    <p>ESTÁS CORDIALMENTE INVITADO</p>
+
+    <h1>Fátima Aranza</h1>
+
+    <p>
+      Mis XV años<br>
+      Sábado, 28 de noviembre de 2026
+    </p>
+
+    <button id="abrirInvitacion">
+      ♫ Abrir invitación
+    </button>
+
+    <p id="mensajeMusica">
+      Toca para descubrir este día especial
+    </p>
+  </div>
+</div>
+
+<audio id="musicaFondo" src="cancion.mp3"
+       preload="auto" loop></audio>
 <header class="hero">
   <div class="hero-inner">
     <div class="kicker">Una noche para recordar</div>
@@ -78,6 +156,22 @@ section{padding:45px 18px}.wrap{max-width:980px;margin:auto}.section-title{text-
 </section>
 <footer class="footer"><strong>Con cariño, Fátima</strong><p>Gracias por ser parte de este día tan especial ♡</p></footer>
 <script>
+const botonAbrir = document.getElementById('abrirInvitacion');
+const pantallaInicio = document.getElementById('pantallaInicio');
+const musica = document.getElementById('musicaFondo');
+const mensajeMusica = document.getElementById('mensajeMusica');
+
+botonAbrir.addEventListener('click', async () => {
+  try {
+    await musica.play();
+
+    pantallaInicio.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  } catch (error) {
+    mensajeMusica.textContent =
+      'No se pudo iniciar la música. Intenta tocar el botón otra vez.';
+  }
+});
 const eventDate = new Date('2026-11-28T00:00:00-06:00').getTime();
 function tick(){
  const diff=eventDate-Date.now();
