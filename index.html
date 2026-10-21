@@ -79,18 +79,23 @@ body {
       rgba(225, 238, 255, 0.78),
       rgba(235, 244, 255, 0.86)
     ),
-    url("fatima.jpg") center center / cover fixed no-repeat;
+    url("FATIMA.jpg") center center / cover fixed no-repeat;
   background-color: #e8f1ff;
 }
 
 /* Fondo fotográfico de la pantalla inicial */
+/* Foto de Fátima en la bienvenida */
 #pantallaInicio {
-  background:
+  background-color: #dceafb;
+  background-image:
     linear-gradient(
-      rgba(12, 43, 86, 0.42),
-      rgba(12, 43, 86, 0.65)
+      rgba(20, 53, 99, 0.38),
+      rgba(20, 53, 99, 0.56)
     ),
-    url("FATIMA.jpg") center center / cover no-repeat;
+    url("./FATIMA.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* Tarjeta de bienvenida */
@@ -189,6 +194,37 @@ h1, h2, h3 {
   border: 1px solid #b9cbe0;
   box-shadow: 0 5px 14px rgba(36, 77, 130, 0.2);
 }
+
+/* Restaurar la visibilidad de la cuenta regresiva */
+.countdown {
+  background: linear-gradient(135deg, #173d70, #2e67a7) !important;
+  color: #ffffff !important;
+}
+
+.countdown h2,
+.countdown .label,
+.countdown .num,
+.countdown .unit,
+.countdown .unit small {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+.countdown .unit {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+}
+
+.countdown h2 {
+  visibility: visible !important;
+}
+
+.countdown .num,
+.countdown .unit small {
+  display: block;
+  visibility: visible !important;
+}
+
 </style>
 </head>
 <body>
